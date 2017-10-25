@@ -1,0 +1,18 @@
+# Site settings
+title: Ronnyyoung Blog
+email: 
+description: "As we may think."
+baseurl: ""
+url: "http://ronnyyoung.github.io"
+twitter_username: ronnyyoung
+github_username:  ronnyyoung
+
+# Build settings
+markdown: kramdown
+permalink: pretty
+
+highlighter: rouge
+kramdown:
+  input: GFM
+  auto_ids: true
+  syntax_highlighter: rouge
