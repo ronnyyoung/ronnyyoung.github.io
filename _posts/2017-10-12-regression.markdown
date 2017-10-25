@@ -35,7 +35,7 @@ mathjax: true
 
 这里我们通过一个例子来说明Regression是如何解决问题的。我们的例子是预测宝可梦进化后的CP（Combat Power）值。
 
-<img src="/assets/005_pokemon.jpeg">
+<img src="/assets/005_pokemon.jpg">
 
 对于这个示例，我们输入是一个宝可梦，输出是这个宝可梦进化后的CP值。
 
@@ -61,11 +61,11 @@ $$y = b + \sum w_ix_i$$
 
 我们希望我们找到的模型可以很好的预测宝可梦进化后的CP值，那我们肯定要先有一些宝可梦和它们进度化的CP，有了这些数据，我们才能用这些数据评价我们的模型，这些数据为**训练数据**。它们的形式为$(x^1,\hat{y}^1),(x^2,\hat{y}^2),\cdots,(x^n,\hat{y}^n)$
 
-<img src="/assets/006_pokemon.jpeg">
+<img src="/assets/006_pokemon.jpg">
 
 我们为宝可梦的问题定义如下的评价函数（损失函数）
 
-<img src="/assets/007_loss_function.jpeg">
+<img src="/assets/007_loss_function.jpg">
 
 我们将选择的function代入到上面的公式中，就得到了：
 
@@ -96,7 +96,7 @@ $$w^*,b^* = arg\max_{w,b}L(w,b) = arg\max_{w,b}\sum^{10}_{n=1}(\hat{y}^n-(b+w\cd
 
 在上面的步骤中，我们通过计算$\frac{dL}{dw}|_{w=w^0}$指明了$L(w)$在点$w^0$处下降最快的反方向，同时用一个更新率$\eta$来控制每次更新的幅度。通过多次迭代，$L(w)$最终会越来越小，拼接近最小值。
 
-<img src="/assets/008_gradient_descent.jpeg">
+<img src="/assets/008_gradient_descent.jpg">
 
 上面我们讨论了只有一个变量时，如何求解$L(w)$的最小值，而宝可梦的问题的最优化任务是两个参数$w$和$b$，我们可以很容易把上面的梯度下降算法应用在$L(w,b)$上。
 
@@ -105,7 +105,7 @@ $$w^*,b^* = arg\max_{w,b}L(w,b) = arg\max_{w,b}\sum^{10}_{n=1}(\hat{y}^n-(b+w\cd
 3. 更新$w$和$b$：$w_1 \gets w_0 - \eta\frac{\partial L}{\partial w}|_{w=w^0,b=b^0}, b_1 \gets b_0 - \eta\frac{\partial L}{\partial b}|_{w=w^0,b=b^0}$
 4. 重复步骤2与步骤3很多次。
 
-<img src="/assets/009_gradient_descent.jpeg">
+<img src="/assets/009_gradient_descent.jpg">
 
 注：上面步骤中关于如何求解$L(w,b)$关于$w$与$b$的偏导数，是很基础的微积分的知识，这里就从略了。关于梯度下降的话题，我们将在后面的课程中更加细致全面的讲解。
 
@@ -115,42 +115,42 @@ $$w^*,b^* = arg\max_{w,b}L(w,b) = arg\max_{w,b}\sum^{10}_{n=1}(\hat{y}^n-(b+w\cd
 
 我们通过10只宝可梦的数据训练我们的模型，得到了$\frac{1}{10}\sum_{n=1}^{10}e^n=31.9$的训练误差。
 
-<img src="/assets/010_training_error.jpeg">
+<img src="/assets/010_training_error.jpg">
 
 我们又找到10只宝可梦作为测试数据集，进一步看我们的模型的表现，得到了35.0的平均测试误差。
 
-<img src="/assets/011_testing_error.jpeg">
+<img src="/assets/011_testing_error.jpg">
 
 现在我们回过头审视我们最开始的步骤：模型选择，为了简化，我们选择一个相当简单的模型一元线程模型，那么如果我们考虑更复杂的特征，用多元线程回归模型来作为我们Function Set效果会发生什么变化呢。
 
-<img src="/assets/012_overfitting.jpeg">
+<img src="/assets/012_overfitting.jpg">
 
 从上面其他模型选择测试中可以看出，一个更复的复杂的模型往往能在训练集上取得更小的误差，但是在测试集上表现确不尽然。这种现像称为**Overfitting**。
 
 
 越复杂的model，则model参数可行域就越大，从而就更容易找到适合training data的参数。关于更加理论的解释，我们将会在下一节中重点介绍
 
-<img src="/assets/013_model_selection.jpeg">
+<img src="/assets/013_model_selection.jpg">
 
 ## Hidden Factors
 
 当我们搜集到更多的宝可梦的数据进行训练时，我们发现之前定义的模型无论如何都无法达到一个满意的效果，于是，我们对搜集的训练数据进行了可视化，如下：
 
-<img src="/assets/014_more_data.jpeg">
+<img src="/assets/014_more_data.jpg">
 
 通过更细致的分析数据，我们发现，数据呈现了多个线性模型的可能。回到我们的步骤1中，我们只选择了宝可梦进化前的cp值作为宝可梦的特征。这里我们容易想到，宝可梦的种类可能也是一个很重要的特征，在决定宝可梦进化后的CP值上起很关键的作用。
 
 所以这时，我们考虑一个更复杂的模型，把宝可梦的种类也考虑到模型中。我们的模型变为：
 
-<img src="/assets/015_new_model.jpeg">
+<img src="/assets/015_new_model.jpg">
 
 用新定义的模型，我们重新进行训练，并最终计算误差：
 
-<img src="/assets/016_new_error.jpeg">
+<img src="/assets/016_new_error.jpg">
 
 既然宝可梦的种类有如此好的效果，我们就会想其他宝可梦的属性如何，我们设计一个模型把所有宝可梦的属性都考虑，并且把模型设计的复杂一些。
 
-<img src="/assets/017_complex_model.jpeg">
+<img src="/assets/017_complex_model.jpg">
 
 很显然，我们遇到了之前同样的问题：过拟合！！
 
@@ -166,7 +166,7 @@ $$f(x+\Delta x) = b+\sum w_i(x_i + \Delta x_i)=y + \sum w_i\Delta x_i $$
 
 虽然我们喜欢更平滑的函数，但是也不能一味的追求平滑，如果函数太平滑，对任何输入，输出基本就没有什么变化，模型就失去了预测能力。
 
-<img src="/assets/018_smoother.jpeg">
+<img src="/assets/018_smoother.jpg">
 
 
 思考： 这里最终我们通过正则化在测试集上达到了11.1的平均误差，那如何再有新的测试数据，正常来说我们的模型在这些新的数据上的平均误差是会高于11.1还是低于11.1还是基本一致呢？
